@@ -1,116 +1,67 @@
 'use client';
-import useForm from '@/components/custom/form';
-import CustomForm, { FormProvider } from '@/components/custom/form';
-import Image from 'next/image';
-import { useEffect } from 'react';
-import z from 'zod';
-
-function Home() {
-   const { Form } = useForm();
-
-   return (
-      <div className="w-scree h-screen flex items-center justify-center">
-         <div>
-            <Form />
-         </div>
-      </div>
-   );
-}
+import About from '@/components/sections/about/about';
+import Contact from '@/components/sections/contact/contact';
+import Expertise from '@/components/sections/expertise/expertise';
+import Hero from '@/components/sections/hero/hero';
+import Project from '@/components/sections/projects/project';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Page() {
+   const [heroRendered, setHeroRendered] = useState(false);
+   useEffect(() => {
+      setTimeout(() => {
+         setHeroRendered(true);
+      }, 3000);
+   }, []);
+
    return (
-      <FormProvider
-         fields={[
-            {
-               key: 'group1',
-               type: 'horizontal-fields-container',
-               fields: [
-                  {
-                     type: 'text',
-                     key: 'password',
-                     title: 'Name',
-                     defaultValue: 'oh my name',
-                     validator(value) {
-                        if (!value) {
-                           return {
-                              isValid: false,
-                              message: 'Name is required',
-                           };
-                        } else return { isValid: true };
-                     },
-                  },
-                  {
-                     type: 'text',
-                     key: 'email',
-                     title: 'Name',
-                     defaultValue: 'oh my name',
-                     validator(value) {
-                        if (!value) {
-                           return {
-                              isValid: false,
-                              message: 'Name is required',
-                           };
-                        } else return { isValid: true };
-                     },
-                  },
-               ],
-            },
-            {
-               key: 'group2',
-               type: 'horizontal-fields-container',
-               fields: [
-                  {
-                     type: 'number',
-                     key: 'passworda',
-                     title: 'Name',
-                     defaultValue: 'oh my name',
-                     validator(value) {
-                        if (!value) {
-                           return {
-                              isValid: false,
-                              message: 'Name is required',
-                           };
-                        } else return { isValid: true };
-                     },
-                  },
-                  {
-                     type: 'selection',
-                     key: 'emaila',
-                     title: 'Name',
-                     defaultValue: '',
-                     placeholder: 'placeholder',
-                     validator(value) {
-                        if (!value) {
-                           return {
-                              isValid: false,
-                              message: 'Name is required',
-                           };
-                        } else return { isValid: true };
-                     },
-                     options: [
-                        { title: 'Option 1', value: 1 },
-                        { title: 'Option 2', value: '2' },
-                        { title: 'Option 3', value: '3' },
-                     ],
-                  },
-               ],
-            },
-            {
-               required: true,
-               type: 'text',
-               key: 'name',
-               title: 'Name',
-               defaultValue: 'oh my name',
-               validator(value) {
-                  if (!value) {
-                     return { isValid: false, message: 'Name is required' };
-                  } else return { isValid: true };
-               },
-            },
-         ]}
-         onSubmit={(v) => console.log({ v })}
-      >
-         <Home />
-      </FormProvider>
+      <div className="snap-y snap-proximity snap-always">
+         <div className="snap-center" id="home">
+            <Hero />
+         </div>
+         {heroRendered && (
+            <div id="about">
+               <About />
+            </div>
+         )}
+         {heroRendered && (
+            <div id="expertise">
+               <Expertise />
+            </div>
+         )}
+         {heroRendered && (
+            <div id="projects" className="flex flex-col gap-80">
+               <Project
+                  projectName="IOH - Digital Partnerships Portal"
+                  projectDescription="uniting various digital entities across various industries in Indonesia through an integrated digital platform that simplifies partnership creation, opens access to various features and resources that can increase growth and enable strategic interactions, with the aim of establishing a new model of partnership in Indonesia."
+                  headline="I've Built Real World Digital Solutions"
+                  projectThumbnail="/ioh_thumbnail.png"
+                  url="https://ioh.co.id/portal/id/ioh-digitalpartnershipsportal"
+                  category="Web Development"
+               />
+               <Project
+                  projectName="Mafia Code Community"
+                  projectDescription="A community for creating simple(Software as a Service) startup applications with the enhancing both soft skills and hard skills in process.  addition to serving as a portfolio enhancer, the are geared towards generating passive income."
+                  headline="I Managed a Community of Developers"
+                  projectThumbnail="/mcc_thumbnail.png"
+                  url="https://mafiacode.vercel.app/"
+                  category="Web Development"
+               />
+               <Project
+                  projectName="KNNEK - Cryptocurrency Community Platform"
+                  projectDescription="A place to share, learn, and grow together. We offer a discussion space for beginners looking to dive into the world of crypto. You can also share insights, discuss current trends, or simply exchange ideas with other members who share similar interests."
+                  headline="Proficient with Modern Tech Stacks"
+                  projectThumbnail="/knnek_thumbnail.png"
+                  url="https://knnek.com/"
+                  category="Web Development & PWA"
+               />
+            </div>
+         )}
+         {heroRendered && (
+            <div id="contact">
+               <Contact />
+            </div>
+         )}
+      </div>
    );
 }
