@@ -32,6 +32,14 @@ export default function Page() {
          {heroRendered && (
             <div id="projects" className="flex flex-col gap-80">
                <Project
+                  projectName="AI Resume Analyzer"
+                  projectDescription="AI-powered service to analyze resume and company compatibility based on ATS-scanability, content quality, structure, and skills qualification"
+                  headline="I've Built AI-powered Service"
+                  projectThumbnail="/resumind_thumbnail.png"
+                  url="https://resumind.topengdev.com"
+                  category="SaaS"
+               />
+               <Project
                   projectName="IOH - Digital Partnerships Portal"
                   projectDescription="uniting various digital entities across various industries in Indonesia through an integrated digital platform that simplifies partnership creation, opens access to various features and resources that can increase growth and enable strategic interactions, with the aim of establishing a new model of partnership in Indonesia."
                   headline="I've Built Real World Digital Solutions"
